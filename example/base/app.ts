@@ -1,4 +1,4 @@
-import axios from '../../src/index'
+import axios, { AxiosError } from '../../src/index'
 
 // axios({
 //   method: 'get',
@@ -93,7 +93,9 @@ axios({
   .then(res => {
     console.log(res)
   })
-  .catch(console.error)
+  .catch((e: AxiosError) => {
+    console.error(e)
+  })
 
 // axios({
 //   method: 'post',
