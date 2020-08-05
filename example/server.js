@@ -15,6 +15,7 @@ router.get('/base/get', (req, res) => {
   res.json(req.query)
 })
 router.post('/base/post', (req, res) => {
+  console.log(req)
   res.json(req.body)
 })
 router.post('/base/buffer', (req, res) => {
