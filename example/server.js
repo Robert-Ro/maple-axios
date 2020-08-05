@@ -6,11 +6,6 @@ const webpackHotMiddleWare = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack.config')
 const router = express.Router()
 
-const jsonParser = bodyParser.json()
-
-// create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
 router.get('/simple/get', (req, res) => {
   res.json({
     msg: `hello world`
@@ -19,8 +14,10 @@ router.get('/simple/get', (req, res) => {
 router.get('/base/get', (req, res) => {
   res.json(req.query)
 })
-router.post('/base/post', jsonParser, (req, res) => {
-  console.log(req.body)
+router.post('/base/post', (req, res) => {
+  for (let i in req) {
+    req.hasOwnProperty(i) && console.log(i, req[i])
+  }
   res.json(req.body)
 })
 router.post('/base/buffer', (req, res) => {
