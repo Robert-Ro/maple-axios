@@ -105,6 +105,6 @@ axios({
   }
 })
   .then(res => {
-    console.log((res.headers as string)
+    console.log(res.headers as string)
   })
   .catch(console.error)
