@@ -95,16 +95,16 @@ axios({
   })
   .catch(console.error)
 
-axios({
-  method: 'post',
-  url: '/base/post',
-  responseType: 'json',
-  data: {
-    a: 3,
-    b: 4
-  }
-})
-  .then(res => {
-    console.log(res.headers as string)
-  })
-  .catch(console.error)
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   responseType: 'json',
+//   data: {
+//     a: 3,
+//     b: 4
+//   }
+// })
+//   .then(res => {
+//     console.log(res.headers as string)
+//   })
+//   .catch(console.error)

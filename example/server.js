@@ -15,10 +15,14 @@ router.get('/base/get', (req, res) => {
   res.json(req.query)
 })
 router.post('/base/post', (req, res) => {
-  for (let i in req) {
-    req.hasOwnProperty(i) && console.log(i, req[i])
+  if (Math.random() > 0.5) {
+    res.json({
+      msg: 'hello world'
+    })
+  } else {
+    res.status(500)
+    res.end()
   }
-  res.json(req.body)
 })
 router.post('/base/buffer', (req, res) => {
   let msg = []
