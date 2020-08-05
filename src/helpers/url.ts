@@ -1,4 +1,4 @@
-import { isDate, isObject } from './util'
+import { isDate, isObject, isPlainObject } from './util'
 
 /**
  * 特殊字符转义
@@ -47,7 +47,7 @@ export function buildURL(url: string, params?: any) {
     values.forEach(val => {
       if (isDate(val)) {
         val = val.toISOString()
-      } else if (isObject(val)) {
+      } else if (isPlainObject(val)) {
         val = JSON.stringify(val)
       }
       parts.push(`${encode(key)}=${encode(val)}`)
