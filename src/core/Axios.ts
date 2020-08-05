@@ -6,7 +6,15 @@ export default class Axios {
    * 发送请求
    * @param config
    */
-  request(config: AxiosRequestConfig): AxiosPromise {
+  request(url: any, config: any): AxiosPromise {
+    if (typeof url === 'string') {
+      if (!config) {
+        config = {}
+      }
+      config.url = url
+    } else {
+      config = url // 说明传入的就是单个参数，且 url 就是 config，因此把 url 赋值给 config
+    }
     return dispatchRequest(config)
   }
   get(url: string, config: AxiosRequestConfig): AxiosPromise {
