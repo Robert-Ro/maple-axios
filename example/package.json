@@ -4,15 +4,18 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "webpack": "^4.28.4",
-    "webpack-dev-middleware": "^3.5.0",
-    "webpack-hot-middleware": "^2.24.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
     "ts-loader": "^5.3.3",
     "tslint-loader": "^3.5.4",
-    "express": "^4.16.4",
-    "body-parser": "^1.18.3"
+    "webpack": "^4.28.4",
+    "webpack-dev-middleware": "^3.5.0",
+    "webpack-hot-middleware": "^2.24.3"
   },
   "scripts": {
     "dev": "node server.js"
+  },
+  "dependencies": {
+    "qs": "^6.9.4"
   }
 }

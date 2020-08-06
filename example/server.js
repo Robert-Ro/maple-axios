@@ -11,7 +11,16 @@ function registerInterceptorRrouter() {
     res.end('hello ')
   })
 }
+function registerConfigRrouter() {
+  router.post('/config/post', function(req, res) {
+    res.json({
+      msg: `hello world`
+    })
+    res.end('hello ')
+  })
+}
 registerInterceptorRrouter()
+registerConfigRrouter()
 
 router.get('/simple/get', (req, res) => {
   res.json({

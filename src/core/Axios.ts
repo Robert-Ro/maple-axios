@@ -8,6 +8,7 @@ import {
 } from '../types'
 import dispatchRequest from './dispatchRequest'
 import InterceptorManager from './InterceptorManager'
+import mergeConfig from './mergeConfig'
 
 // 首先，构造一个 PromiseChain 类型的数组 chain，并把 dispatchRequest 函数赋值给 resolved 属性；
 // 接着先遍历请求拦截器插入到 chain 的前面；然后再遍历响应拦截器插入到 chain 后面。
@@ -27,8 +28,10 @@ interface PromiseChain {
 }
 export default class Axios {
   interceptors: Interceptors
+  defaults: AxiosRequestConfig
 
-  constructor() {
+  constructor(initConfig: AxiosRequestConfig) {
+    this.defaults = initConfig
     this.interceptors = {
       request: new InterceptorManager<AxiosRequestConfig>(),
       response: new InterceptorManager<AxiosResponse>()
@@ -47,6 +50,7 @@ export default class Axios {
     } else {
       config = url // 说明传入的就是单个参数，且 url 就是 config，因此把 url 赋值给 config
     }
+    config = mergeConfig(this.defaults, config)
     const chain: PromiseChain[] = [
       {
         resolved: dispatchRequest,
