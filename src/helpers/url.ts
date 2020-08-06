@@ -100,3 +100,12 @@ function resolveURL(url: string): URLOrigin {
 function isURLSearchParams(val: any): val is URLSearchParams {
   return val !== 'undefined' && val instanceof URLSearchParams
 }
+
+export function isAbsoluteURL(url: string): boolean {
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url)
+}
+
+export function combineURL(baseURL: string, relativeURL?: string): string {
+  // 一后一前分别去除/
+  return relativeURL ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '') : baseURL
+}
