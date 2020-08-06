@@ -43,6 +43,11 @@ export interface AxiosError extends Error {
 }
 
 export interface Axios {
+  interceptors: {
+    request: AxiosInterceptorManager<AxiosRequestConfig>
+    response: AxiosInterceptorManager<AxiosResponse>
+  }
+
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>
   get<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
   delete<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
@@ -57,3 +62,15 @@ export interface AxiosInstance extends Axios {
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
 }
 // AxiosResponse 接口添加了泛型参数 T，T=any 表示泛型的类型参数默认值为 any
+
+export interface AxiosInterceptorManager<T> {
+  use(resolve: ResolvedFn<T>, rejected?: RejectedFn): number
+  eject(id: number): void
+}
+
+export interface ResolvedFn<T = any> {
+  (val: T): T | Promise<T>
+}
+export interface RejectedFn {
+  (error: any): any
+}

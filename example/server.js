@@ -6,6 +6,13 @@ const webpackHotMiddleWare = require('webpack-hot-middleware')
 const webpackConfig = require('./webpack.config')
 const router = express.Router()
 
+function registerInterceptorRrouter() {
+  router.get('/interceptor/get', function(req, res) {
+    res.end('hello ')
+  })
+}
+registerInterceptorRrouter()
+
 router.get('/simple/get', (req, res) => {
   res.json({
     msg: `hello world`
