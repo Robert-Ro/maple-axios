@@ -18,30 +18,30 @@ import qs from 'qs'
 //   })
 //   .catch(console.error)
 
-// axios({
-//   transformRequest: [
-//     function(data: any) {
-//       return qs.stringify(data)
-//     },
-//     ...(axios.defaults.transformRequest as AxiosTransformer[])
-//   ],
-//   transformResponse: [
-//     ...(axios.defaults.transformResponse as AxiosTransformer[]),
-//     function(data) {
-//       if (typeof data === 'object') {
-//         data.b = 2
-//       }
-//       return data
-//     }
-//   ],
-//   url: '/config/post',
-//   method: 'post',
-//   data: {
-//     a: 1
-//   }
-// })
-//   .then(console.log)
-//   .catch(console.error)
+axios({
+  transformRequest: [
+    function(data: any) {
+      return qs.stringify(data)
+    },
+    ...(axios.defaults.transformRequest as AxiosTransformer[])
+  ],
+  transformResponse: [
+    ...(axios.defaults.transformResponse as AxiosTransformer[]),
+    function(data) {
+      if (typeof data === 'object') {
+        data.b = 2
+      }
+      return data
+    }
+  ],
+  url: '/config/post',
+  method: 'post',
+  data: {
+    a: 1
+  }
+})
+  .then(console.log)
+  .catch(console.error)
 
 const instance = axios.create({
   transformRequest: [

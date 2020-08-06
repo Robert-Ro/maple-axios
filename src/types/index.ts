@@ -27,7 +27,9 @@ export interface AxiosRequestConfig {
   [props: string]: any
   transformRequest?: AxiosTransformer | AxiosTransformer[]
   transformResponse?: AxiosTransformer | AxiosTransformer[]
+  cancelToken?: CancelToken
 }
+
 export interface AxiosResponse<T = any> {
   data: T
   status: number
@@ -64,7 +66,11 @@ export interface Axios {
   patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
 }
 export interface AxiosStatic extends AxiosInstance {
-  create(config: AxiosRequestConfig): AxiosInstance
+  create(config?: AxiosRequestConfig): AxiosInstance
+
+  CancelToken: CancelTokenStatic
+  Cancel: CancelStatic
+  isCancel: (value: any) => boolean
 }
 export interface AxiosInstance extends Axios {
   <T = any>(config: AxiosRequestConfig): AxiosPromise<T>
@@ -82,4 +88,38 @@ export interface ResolvedFn<T = any> {
 }
 export interface RejectedFn {
   (error: any): any
+}
+
+export interface CancelToken {
+  promise: Promise<Cancel>
+  reason?: Cancel
+
+  throwIfRequested(): void
+}
+export interface Canceler {
+  (message?: string): void
+}
+export interface CancelExecutor {
+  (cancle: Canceler): void
+}
+
+export interface CancelTokenSource {
+  token: CancelToken
+  cancel: Canceler
+}
+
+/**
+ * CancelTokenSource 作为 CancelToken 类静态方法 source 函数的返回值类型，
+ * CancelTokenStatic 则作为 CancelToken 类的类类型
+ */
+export interface CancelTokenStatic {
+  new (executor: CancelExecutor): CancelToken
+  source(): CancelTokenSource
+}
+
+export interface Cancel {
+  message?: string
+}
+export interface CancelStatic {
+  new (message?: string): Cancel
 }
