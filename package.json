@@ -39,7 +39,7 @@
     "dev": "node example/server.js"
   },
   "lint-staged": {
-    "{src,test}/**/*.ts": [
+    "{src,tests}/**/*.ts": [
       "prettier --write",
       "git add"
     ]
@@ -53,8 +53,8 @@
     "transform": {
       ".(ts|tsx)": "ts-jest"
     },
-    "testEnvironment": "node",
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testEnvironment": "jsdom",
+    "testRegex": "\\.(test|spec)\\.(ts|tsx)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -62,7 +62,7 @@
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/test/"
+      "/tests/"
     ],
     "coverageThreshold": {
       "global": {
@@ -73,7 +73,11 @@
       }
     },
     "collectCoverageFrom": [
-      "src/*.{js,ts}"
+      "src/*.{js,ts}",
+      "src/**/*.{js,ts}"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/boot.ts"
     ]
   },
   "prettier": {
@@ -88,6 +92,7 @@
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
+    "@types/jasmine-ajax": "^3.3.1",
     "@types/jest": "^22.2.3",
     "@types/node": "^10.11.0",
     "colors": "^1.4.0",
@@ -96,6 +101,8 @@
     "cross-env": "^7.0.2",
     "cz-conventional-changelog": "^3.2.0",
     "husky": "^4.2.5",
+    "jasmine-ajax": "^4.0.0",
+    "jasmine-core": "^3.6.0",
     "jest": "^26.2.2",
     "jest-config": "^26.2.2",
     "lint-staged": "^10.2.11",

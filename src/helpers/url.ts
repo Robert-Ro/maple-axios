@@ -1,4 +1,4 @@
-import { isDate, isObject, isPlainObject } from './util'
+import { isDate, isPlainObject } from './util'
 
 /**
  * 特殊字符转义

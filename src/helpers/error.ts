@@ -14,7 +14,7 @@ export class AxiosError extends Error {
     request?: any,
     response?: AxiosResponse
   ) {
-    super(message)
+    super(message) // FIXME 测试所需
     this.config = config
     this.code = code
     this.request = request
